@@ -1,14 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Notes
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding class="bg">
+  <ion-list>
+    <!-- loop through notes, grab title-->
+    <button ion-item *ngFor="let note of notes | async" (click)="getNote(note.createDate)"> <!-- async. subscribes to promise and returns latest value -->
+      {{note.title}}
+    </button>
+  </ion-list>
+  <button ion-button (click)="addNote()">Add Note</button>
 </ion-content>

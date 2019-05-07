@@ -1,0 +1,39 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Note</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <!-- formgroup tracks value and validity state of formcontrol instances-->
+    <form [formGroup]="formGroup" (ngSubmit)="saveNote(formGroup.value)">
+      <ion-item>
+        <ion-label>Date:</ion-label>
+        <!-- date property-->
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime>
+        </ion-item>
+      <ion-item>
+        <ion-label>Title:</ion-label>
+        <!-- title property-->
+      <ion-input type="text" name="title" formControlName="title" required></ion-input>
+        <!-- if title form control is not valid & if it has been touched-->
+        <div class ="alert" *ngIf="!formGroup.controls['title'].valid
+          && formGroup.controls['title'].touched">{{ titleAlert }}</div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Note:</ion-label>
+         <!-- note property-->
+         <ion-input type="text" name="content" formControlName="content" required></ion-input>
+         <!-- if notes form control is not valid & if it has been touched-->
+          <div class ="alert" *ngIf="!formGroup.controls['content'].valid
+          && formGroup.controls['content'].touched">{{ contentAlert }}</div>
+      </ion-item>
+    
+      <!-- button disables if the form group isn't valid -->
+      <button ion-button type="submit" [disabled]="!formGroup.valid">Save Note</button>
+    </form>
+</ion-content>
+
+
